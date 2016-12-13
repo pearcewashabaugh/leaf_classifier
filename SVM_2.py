@@ -31,11 +31,13 @@ clf = svm.SVC(gamma = 0.001, C = 100.0)
 clf.fit( pics_resized_flat[:numTrain], range(numTrain) )
 
 species = numpy.empty(numPics, dtype=object) #Create an empty array of length numPics
-species[:numTrain] = train['species'] #Copy Train's species
-closest_train_ind = clf.predict(pics_resized_flat[numTrain:]) #For each test leaf, get the index of training leaf that is closest to this test leaf.
-for i in range(numTrain,numPics):
-    species[i] = species[closest_train_ind[i-numTrain]]
+species[:numTrain] = train['species'] #Copy Train's species to the first numTrain elements of this array
 
+#For each test leaf, get the index of training leaf that is closest to this test leaf. 
+closest_train_ind = clf.predict(pics_resized_flat[numTrain:])
+for i in range(numTrain,numPics):
+    #Note that for each i, closest_train_ind[i-numTrain] is an integer in range(0:numTrain)
+    species[i] = species[closest_train_ind[i-numTrain]]
 
 
 
