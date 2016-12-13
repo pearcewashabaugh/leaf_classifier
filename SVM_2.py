@@ -47,12 +47,9 @@ plt.imshow(pics[myId])
 plt.show()
 
 display('Below are all the TEST leaves of the species ' + myIdSpecies + ':')
-counter = 1
 for i in range(numPics):
     if i != myId and species[i] == myIdSpecies and i >= numTrain:
         display("index i = %d,  picture id = %d" % (i, pic_id[i]))
         plt.imshow(pics[i])
         plt.show()
-        counter += 1
-display("There are a total of %d leaves of species %s." % (counter, myIdSpecies))
 
